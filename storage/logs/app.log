@@ -1,0 +1,7 @@
+2022/05/17 14:58:06 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T14:58:06.767686+08:00"}
+2022/05/17 16:28:50 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T16:28:50.462184+08:00"}
+2022/05/17 16:31:08 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T16:31:08.16348+08:00"}
+2022/05/17 17:05:54 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:05:54.454164+08:00"}
+2022/05/17 17:08:43 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:08:43.048121+08:00"}
+2022/05/17 17:11:11 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:11:11.951219+08:00"}
+2022/05/17 17:20:39 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:20:39.237624+08:00"}
