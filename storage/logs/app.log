@@ -5,3 +5,4 @@
 2022/05/17 17:08:43 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:08:43.048121+08:00"}
 2022/05/17 17:11:11 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:11:11.951219+08:00"}
 2022/05/17 17:20:39 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:20:39.237624+08:00"}
+2022/05/18 17:08:20 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 23 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":"2022-05-18T17:08:20.92477+08:00"}
