@@ -89,6 +89,7 @@ func main() {
 		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
+	// 校验配置是否真正的映射到配置结构体
 	//log.Println(global.ServerSetting)
 	//log.Println(global.AppSetting)
 	//log.Println(global.DatabaseSetting)

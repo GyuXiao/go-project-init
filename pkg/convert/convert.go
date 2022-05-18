@@ -15,7 +15,6 @@ func (s StrTo) String() string {
 }
 
 func (s StrTo) Int() (int, error) {
-	// Go 也太方便了吧，连 字符串 转 int 类型都有专门的函数
 	v, err := strconv.Atoi(s.String())
 	return v, err
 }
