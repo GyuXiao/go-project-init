@@ -75,6 +75,10 @@ func setupDBEngine() error {
 	return nil
 }
 
+// @title Gyu 博客系统
+// @version 1.0
+// @description 使用 Go 搭建一个 Blog
+// @termsOfService https://github.com/GyuXiao/GyuBlog
 func main() {
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()
