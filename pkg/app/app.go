@@ -33,6 +33,13 @@ func (r *Response) ToResponse(data interface{}) {
 	r.Ctx.JSON(http.StatusOK, data)
 }
 
+// ToResponseList
+/**
+ * @Description: 序列化 TagList
+ * @receiver r
+ * @param list
+ * @param totalRows
+ */
 func (r *Response) ToResponseList(list interface{}, totalRows int) {
 	r.Ctx.JSON(http.StatusOK, gin.H{
 		"list": list,
