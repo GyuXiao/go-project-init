@@ -7,8 +7,8 @@
 package app
 
 import (
+	"GyuBlog/internal/middleware"
 	"github.com/gin-gonic/gin"
-	ut "github.com/go-playground/universal-translator"
 	val "github.com/go-playground/validator/v10"
 	"strings"
 )
@@ -20,6 +20,7 @@ type ValidError struct {
 
 type ValidErrors []*ValidError
 
+// 相当于实现了 error 接口
 func (v *ValidError) Error() string {
 	return v.Message
 }
@@ -38,19 +39,15 @@ func (v ValidErrors) Errors() []string {
 
 func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 	var errs ValidErrors
-
 	// 参数绑定 + 入参校验
 	err := c.ShouldBind(v)
-
 	// 发生错误后，通过在中间件 Translations 设置的 Translator 来对错误消息体进行具体的翻译行为
 	if err != nil {
-		v := c.Value("trans")
-		trans, _ := v.(ut.Translator)
-		verrs, ok := err.(val.ValidationErrors)
+		vErrors, ok := err.(val.ValidationErrors)
 		if !ok {
 			return false, errs
 		}
-		for key, value := range verrs.Translate(trans) {
+		for key, value := range vErrors.Translate(middleware.Trans) {
 			errs = append(errs, &ValidError{
 				key:     key,
 				Message: value,

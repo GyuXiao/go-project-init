@@ -13,7 +13,7 @@ Database:
   DBType: mysql
   Username: root
   Password: 2288.xzk
-  Host: 127.0.0.3306
+  Host: 127.0.0.1:3306
   DBName: blog_service
   TablePrefix: blog_
   Charset: utf8

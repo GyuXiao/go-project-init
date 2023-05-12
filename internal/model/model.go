@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+// 每张表的公共字段
+
 type Model struct {
 	ID         uint32 `gorm:"primary_key" json:"id"`
 	CreatedBy  string `json:"created_by"`

@@ -6,12 +6,13 @@
 **/
 package service
 
-// 在应用分层中，service 层主要是针对业务逻辑的封装，如果有一些业务聚合和处理，也可以放在该层进行编写，同时也能隔离上下两层的逻辑
-
 import (
 	"GyuBlog/internal/model"
 	"GyuBlog/pkg/app"
 )
+
+// 参数校验
+// 主要是用到两个 tag 标签，form 和 binding，分别代表表单的映射字段名和入参校验规则，实现参数绑定和校验
 
 type CountTagRequest struct {
 	Name  string `form:"name" binding:"max=100"`

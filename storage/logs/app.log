@@ -6,3 +6,16 @@
 2022/05/17 17:11:11 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:11:11.951219+08:00"}
 2022/05/17 17:20:39 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 25 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":"2022-05-17T17:20:39.237624+08:00"}
 2022/05/18 17:08:20 {"callers":["$/Users/zk.xiao/GolandProjects/GyuBlog/main.go: 23 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":"2022-05-18T17:08:20.92477+08:00"}
+2023/05/12 20:18:46 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 23 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683893926090161000}
+2023/05/12 20:19:42 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 23 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683893982298823400}
+2023/05/12 20:23:59 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 23 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683894239130366800}
+2023/05/12 20:25:33 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 23 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683894333205964400}
+2023/05/12 23:52:55 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683906775620276300}
+2023/05/12 23:53:18 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ","time":1683906798304941900}
+2023/05/12 23:53:30 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683906810979564800}
+2023/05/12 23:55:37 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683906937234916000}
+2023/05/12 23:55:53 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ","time":1683906953881070000}
+2023/05/12 23:56:01 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683906961353330100}
+2023/05/12 23:56:46 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683907006436063500}
+2023/05/12 23:56:51 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ","time":1683907011143098300}
+2023/05/12 23:57:31 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[ 0 1]中的一个","time":1683907051701475300}

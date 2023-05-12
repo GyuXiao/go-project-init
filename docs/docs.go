@@ -329,6 +329,8 @@ var SwaggerInfo = &swag.Spec{
 	SwaggerTemplate:  docTemplate,
 }
 
+// 主要逻辑：swag 会在生成时去检索项目下的注解信息，然后将项目信息和接口路由按规范生成到包全局变量 doc 中去
+// 紧接着会在 ReadDoc 方法中做一些 template 的模板映射等工作，完善 doc 的输出
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
 }

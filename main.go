@@ -2,11 +2,17 @@ package main
 
 import (
 	"GyuBlog/global"
+	"GyuBlog/internal/middleware"
 	"GyuBlog/internal/model"
 	"GyuBlog/internal/routers"
 	"GyuBlog/pkg/logger"
 	"GyuBlog/pkg/setting"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/locales/zh"
+	ut "github.com/go-playground/universal-translator"
+	val "github.com/go-playground/validator/v10"
+	zhTranslations "github.com/go-playground/validator/v10/translations/zh"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"log"
 	"net/http"
@@ -24,6 +30,8 @@ func init() {
 	if err != nil {
 		log.Fatalf("init.setupLogger err: %v", err)
 	}
+
+	setupValidator()
 }
 
 // 在 setupLogger 函数内部对 global 的包全局变量 Logger 进行了初始化，
@@ -50,12 +58,10 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
-
 	err = setting.ReadSection("App", &global.AppSetting)
 	if err != nil {
 		return err
 	}
-
 	err = setting.ReadSection("Database", &global.DatabaseSetting)
 	if err != nil {
 		return err
@@ -75,11 +81,21 @@ func setupDBEngine() error {
 	return nil
 }
 
+func setupValidator() {
+	uni := ut.New(zh.New())
+	middleware.Trans, _ = uni.GetTranslator("zh")
+	v, ok := binding.Validator.Engine().(*val.Validate)
+	if ok {
+		_ = zhTranslations.RegisterDefaultTranslations(v, middleware.Trans)
+	}
+}
+
 // @title Gyu 博客系统
 // @version 1.0
 // @description 使用 Go 搭建一个 Blog
 // @termsOfService https://github.com/GyuXiao/GyuBlog
 func main() {
+	// 把映射好的配置和 gin 的运行模式进行配置
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()
 	s := &http.Server{

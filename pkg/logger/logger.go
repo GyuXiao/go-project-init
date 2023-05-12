@@ -106,7 +106,7 @@ func (l *Logger) WithCaller(skip int) *Logger {
 func (l *Logger) WithCallersEngine() *Logger {
 	maxCallerDepth := 25
 	minCallerDepth := 1
-	callers := []string{}
+	var callers []string
 	pcs := make([]uintptr, maxCallerDepth)
 	depth := runtime.Callers(minCallerDepth, pcs)
 	frames := runtime.CallersFrames(pcs[:depth])
@@ -125,9 +125,9 @@ func (l *Logger) WithCallersEngine() *Logger {
 // 日志内容格式化
 
 func (l *Logger) JSONFormal(level Level, message string) map[string]interface{} {
-	data := make(Fields, len(l.fields)+4) // level, tme,
+	data := make(Fields, len(l.fields)+4)
 	data["level"] = level.String()
-	data["time"] = time.Now().Local()
+	data["time"] = time.Now().Local().UnixNano()
 	data["message"] = message
 	data["callers"] = l.callers
 	if len(l.fields) > 0 {

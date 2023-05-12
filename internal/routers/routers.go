@@ -2,22 +2,19 @@ package routers
 
 import (
 	_ "GyuBlog/docs"
-	"GyuBlog/internal/middleware"
 	v1 "GyuBlog/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func NewRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
-	r.Use(middleware.Translations())
 
 	// 测试一下 swagger
-	url := ginSwagger.URL("http://127.0.0.1:8000/swagger/doc.json")
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	// 可以尝试访问一下：http://127.0.0.1:8000/swagger/index.html
+	// url := ginSwagger.URL("http://127.0.0.1:8000/swagger/doc.json")
+	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
 	tag := v1.NewTag()
 	article := v1.NewArticle()
