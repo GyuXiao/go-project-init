@@ -30,7 +30,7 @@ func (t Tag) Count(db *gorm.DB) (int, error) {
 
 	var count int
 	if err := db.Model(&t).Where("is_del = ?", 0).Count(&count).Error; err != nil {
-		return 0, nil
+		return 0, err
 	}
 	return count, nil
 }
@@ -56,8 +56,12 @@ func (t Tag) Create(db *gorm.DB) error {
 	return db.Create(&t).Error
 }
 
-func (t Tag) Update(db *gorm.DB) error {
-	return db.Model(&Tag{}).Where("id = ? AND is_del = ?", t.ID, 0).Update(t).Error
+func (t Tag) Update(db *gorm.DB, values interface{}) error {
+	// 注意，下面是 Updates 不是 Update
+	if err := db.Model(t).Where("id = ? AND is_del = ?", t.ID, 0).Updates(values).Error; err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t Tag) Delete(db *gorm.DB) error {

@@ -9,7 +9,7 @@ import (
 	"GyuBlog/pkg/setting"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
-	"github.com/go-playground/locales/zh"
+	"github.com/go-playground/locales/en"
 	ut "github.com/go-playground/universal-translator"
 	val "github.com/go-playground/validator/v10"
 	zhTranslations "github.com/go-playground/validator/v10/translations/zh"
@@ -29,6 +29,11 @@ func init() {
 	err = setupLogger()
 	if err != nil {
 		log.Fatalf("init.setupLogger err: %v", err)
+	}
+
+	err = setupDBEngine()
+	if err != nil {
+		log.Fatalf("init.setupDBEngine err: %v", err)
 	}
 
 	setupValidator()
@@ -82,8 +87,8 @@ func setupDBEngine() error {
 }
 
 func setupValidator() {
-	uni := ut.New(zh.New())
-	middleware.Trans, _ = uni.GetTranslator("zh")
+	uni := ut.New(en.New())
+	middleware.Trans, _ = uni.GetTranslator("en")
 	v, ok := binding.Validator.Engine().(*val.Validate)
 	if ok {
 		_ = zhTranslations.RegisterDefaultTranslations(v, middleware.Trans)

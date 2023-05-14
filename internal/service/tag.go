@@ -13,6 +13,7 @@ import (
 
 // 参数校验
 // 主要是用到两个 tag 标签，form 和 binding，分别代表表单的映射字段名和入参校验规则，实现参数绑定和校验
+// 其实这里也可以抽离出来，单独放到接口校验层
 
 type CountTagRequest struct {
 	Name  string `form:"name" binding:"max=100"`
@@ -25,23 +26,23 @@ type TagListRequest struct {
 }
 
 type CreateTagRequest struct {
-	Name      string `form:"name" binding:"required, min=3, max=100"`
-	CreatedBy string `form:"created_by" binding:"required, min=3, max=100"`
+	Name      string `form:"name" binding:"required,min=2,max=100"`
+	CreatedBy string `form:"created_by" binding:"required,min=2,max=100"`
 	State     uint8  `form:"state,default=1" binding:"oneof= 0 1"`
 }
 
 type UpdateTagRequest struct {
-	ID         uint32 `form:"id" binding:"required, gte=1"`
-	Name       string `form:"name" binding:"min=3, max=100"`
-	State      uint8  `form:"state" binding:"required, oneof= 0 1"`
-	ModifiedBy string `form:"modified_by" binding:"required, min=3, max=100"`
+	ID         uint32 `form:"id" binding:"required,gte=1"`
+	Name       string `form:"name" binding:"max=100"`
+	State      uint8  `form:"state" binding:"oneof= 0 1"`
+	ModifiedBy string `form:"modified_by" binding:"required,min=2,max=100"`
 }
 
 type DeleteTagRequest struct {
-	ID uint32 `form:"id" binding:"required, gte=1"`
+	ID uint32 `form:"id" binding:"required,gte=1"`
 }
 
-func (svc Service) CreateTag(param *CreateTagRequest) error {
+func (svc *Service) CreateTag(param *CreateTagRequest) error {
 	return svc.dao.CreateTag(param.Name, param.State, param.CreatedBy)
 }
 

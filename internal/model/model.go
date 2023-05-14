@@ -48,10 +48,7 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	}
 
 	db.SingularTable(true)
-	db.DB().SetMaxIdleConns(databaseSetting.MaxIdleConns)
-	db.DB().SetMaxOpenConns(databaseSetting.MaxOpenConns)
-
-	db.SingularTable(true)
+	// 注册回调行为
 	db.Callback().Create().Replace("gorm:update_time-stamp", updateTimeStampForCreateCallback)
 	db.Callback().Update().Replace("gorm:update_time-stamp", updateTimeStampForUpdateCallback)
 	db.Callback().Delete().Replace("gorm:delete", deleteCallback)
@@ -61,16 +58,13 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	return db, nil
 }
 
-// 分别进行如下的回调行为：
-// 注册一个新的回调；
-// 替换现在的回调；
-// 删除所有的回调；
-// 注册回调的先后顺序
+// 采用 model callback 的方式去处理表的公共字段
 
+// 新增行为回调
 func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 	if !scope.HasError() {
 		nowTime := time.Now().Unix()
-		// 通过 `scope.FieldByName` 判断是否包含所需的字段，比如"CreatedOn"
+		// 通过 `scope.FieldByName` 判断当前是否包含所需的字段，比如"CreatedOn"
 		if createTimeField, ok := scope.FieldByName("CreatedOn"); ok {
 			// 判断 `Field.IsBlank` 判断该字段的值是否为空
 			if createTimeField.IsBlank {
@@ -85,14 +79,16 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 	}
 }
 
+// 更新行为回调
 func updateTimeStampForUpdateCallback(scope *gorm.Scope) {
-	// 通过 `scope.Get()` 去获取当前设置了标识 `gorm:update_column` 的字段属性
+	// 通过 `scope.Get()` 去获取当前设置了标识为 `gorm:update_column` 的字段属性
 	// 如果不存在，则将会在更新回调内设置默认字段 ModifiedOn 的值为当前的时间戳。
 	if _, ok := scope.Get("gorm:update_column"); !ok {
 		_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
 	}
 }
 
+// 删除行为回调
 func deleteCallback(scope *gorm.Scope) {
 	if !scope.HasError() {
 		var extraOption string
@@ -101,14 +97,14 @@ func deleteCallback(scope *gorm.Scope) {
 		}
 		// 判断是否存在 DeletedOn 和 IsDel 字段，
 		// 若存在则调整为执行 UPDATE 操作进行软删除（修改 DeletedOn 和 IsDel 的值），
-		// 否则执行 DELETE 进行硬删除
+		// 否则执行 DELETE 进行硬删除（多少觉得有点问题，delete 语句是删了整张表？）
 		deleteOnField, hasDeleteOnField := scope.FieldByName("DeleteOn")
 		isDelField, hasIsDelField := scope.FieldByName("IsDel")
 		if !scope.Search.Unscoped && hasDeleteOnField && hasIsDelField {
 			now := time.Now().Unix()
 			// 调用 scope.QuotedTableName 方法获取当前所引用的表名，
-			// 并调用一系列方法针对 SQL 语句的组成部分进行处理和转移，
-			// 最后在完成一些所需参数设置后调用 scope.CombinedConditionSql 方法完成 SQL 语句的组装
+			// 并调用一系列方法针对 SQL 语句的组成部分进行处理，转移，参数设置
+			// 最后调用 scope.CombinedConditionSql 方法完成 SQL 语句的组装
 			scope.Raw(fmt.Sprintf(
 				"UPDATE %v SET %v=%v, %v=%v%v%v",
 				scope.QuotedTableName(),
