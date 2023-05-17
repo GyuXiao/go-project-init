@@ -10,6 +10,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"io"
 	"log"
 	"runtime"
@@ -66,6 +67,17 @@ func NewLogger(w io.Writer, prefix string, flag int) *Logger {
 func (l *Logger) clone() *Logger {
 	nl := *l
 	return &nl
+}
+
+func (l *Logger) WithTrace() *Logger {
+	ginCtx, ok := l.ctx.(*gin.Context)
+	if ok {
+		return l.WithFields(Fields{
+			"trace_id": ginCtx.MustGet("X-Trace-ID"),
+			"span_id":  ginCtx.MustGet("X-Span-ID"),
+		})
+	}
+	return l
 }
 
 // 设置日志公共字段
@@ -197,8 +209,8 @@ func (l *Logger) Error(v ...interface{}) {
 	l.Output(LevelError, fmt.Sprint(v...))
 }
 
-func (l *Logger) Errorf(format string, v ...interface{}) {
-	l.Output(LevelError, fmt.Sprintf(format, v...))
+func (l *Logger) Errorf(ctx context.Context, format string, v ...interface{}) {
+	l.WithContext(ctx).WithTrace().Output(LevelError, fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Panic(v ...interface{}) {

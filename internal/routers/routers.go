@@ -2,8 +2,11 @@ package routers
 
 import (
 	_ "GyuBlog/docs"
+	"GyuBlog/global"
+	"GyuBlog/internal/routers/api"
 	v1 "GyuBlog/internal/routers/api/v1"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func NewRouter() *gin.Engine {
@@ -18,6 +21,10 @@ func NewRouter() *gin.Engine {
 
 	tag := v1.NewTag()
 	article := v1.NewArticle()
+
+	upload := api.NewUpload()
+	r.POST("/upload/file", upload.UploadFile)
+	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
 
 	apiv1 := r.Group("/api/v1")
 	{
