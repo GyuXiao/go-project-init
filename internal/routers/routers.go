@@ -5,6 +5,7 @@ import (
 	"GyuBlog/global"
 	"GyuBlog/internal/routers/api"
 	v1 "GyuBlog/internal/routers/api/v1"
+	"GyuBlog/pkg/app"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -26,7 +27,9 @@ func NewRouter() *gin.Engine {
 	r.POST("/upload/file", upload.UploadFile)
 	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
 
+	r.POST("/auth", api.GetAuth)
 	apiv1 := r.Group("/api/v1")
+	apiv1.Use(app.JWT())
 	{
 		apiv1.POST("/tags", tag.Create)       // 新增标签
 		apiv1.DELETE("/tags/:id", tag.Delete) // 删除指定标签

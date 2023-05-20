@@ -11,11 +11,10 @@ import (
 	"GyuBlog/pkg/setting"
 )
 
-// 对最初预估的三个区段配置，进行全局变量的声明
-// 便于在接下来的步骤将其关联起来，并且提供给应用程序内部调用
 var (
 	ServerSetting   *setting.ServerSettingS
 	AppSetting      *setting.AppSettingS
 	DatabaseSetting *setting.DatabaseSettingS
 	Logger          *logger.Logger
+	JWTSetting      *setting.JWTSettingS
 )
