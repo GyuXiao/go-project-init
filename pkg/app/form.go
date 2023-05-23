@@ -7,7 +7,7 @@
 package app
 
 import (
-	"GyuBlog/internal/middleware"
+	"GyuBlog/global"
 	"github.com/gin-gonic/gin"
 	val "github.com/go-playground/validator/v10"
 	"strings"
@@ -47,7 +47,7 @@ func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 		if !ok {
 			return false, errs
 		}
-		for key, value := range vErrors.Translate(middleware.Trans) {
+		for key, value := range vErrors.Translate(global.Trans) {
 			errs = append(errs, &ValidError{
 				key:     key,
 				Message: value,

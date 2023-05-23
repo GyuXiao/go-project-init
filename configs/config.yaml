@@ -31,3 +31,12 @@ JWT:
   Secret: Gyu
   Issuer: blog-service
   Expire: 7200
+Email:
+  Host: smtp.qq.com
+  Port: 465
+  UserName: 3301255914@qq.com
+  Password: 2288.xzk
+  IsSSL: true
+  From: 3301255914@qq.com
+  To:
+    - xxx@qq.com

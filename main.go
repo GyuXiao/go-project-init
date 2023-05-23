@@ -2,7 +2,6 @@ package main
 
 import (
 	"GyuBlog/global"
-	"GyuBlog/internal/middleware"
 	"GyuBlog/internal/model"
 	"GyuBlog/internal/routers"
 	"GyuBlog/pkg/logger"
@@ -75,6 +74,10 @@ func setupSetting() error {
 	if err != nil {
 		return err
 	}
+	err = setting.ReadSection("Email", &global.EmailSetting)
+	if err != nil {
+		return err
+	}
 
 	global.ServerSetting.ReadTimeout *= time.Second
 	global.ServerSetting.WriteTimeout *= time.Second
@@ -93,10 +96,10 @@ func setupDBEngine() error {
 
 func setupValidator() {
 	uni := ut.New(en.New())
-	middleware.Trans, _ = uni.GetTranslator("en")
+	global.Trans, _ = uni.GetTranslator("en")
 	v, ok := binding.Validator.Engine().(*val.Validate)
 	if ok {
-		_ = zhTranslations.RegisterDefaultTranslations(v, middleware.Trans)
+		_ = zhTranslations.RegisterDefaultTranslations(v, global.Trans)
 	}
 }
 
