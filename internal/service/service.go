@@ -8,17 +8,17 @@ package service
 
 import (
 	"GyuBlog/global"
-	"GyuBlog/internal/dao"
+	"GyuBlog/internal/dao/mysql"
 	"context"
 )
 
 type Service struct {
 	ctx context.Context
-	dao *dao.Dao
+	dao *mysql.Dao
 }
 
 func New(ctx context.Context) Service {
 	svc := Service{ctx: ctx}
-	svc.dao = dao.New(global.DBEngine)
+	svc.dao = mysql.New(global.DBEngine)
 	return svc
 }

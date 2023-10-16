@@ -210,7 +210,7 @@ func (l *Logger) Error(v ...interface{}) {
 }
 
 func (l *Logger) Errorf(ctx context.Context, format string, v ...interface{}) {
-	l.WithContext(ctx).WithTrace().Output(LevelError, fmt.Sprintf(format, v...))
+	l.Output(LevelError, fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Panic(v ...interface{}) {

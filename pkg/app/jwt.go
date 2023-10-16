@@ -26,8 +26,8 @@ func GenerateToken(appKey, appSecret string) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(global.JWTSetting.Expire)
 	claims := Claims{
-		AppKey:    util.EncodeMd5(appKey),
-		AppSecret: util.EncodeMd5(appSecret),
+		AppKey:    util.EncodeMd5([]byte(appKey)),
+		AppSecret: util.EncodeMd5([]byte(appSecret)),
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: &jwt.NumericDate{Time: expireTime},
 			Issuer:    global.JWTSetting.Issuer,

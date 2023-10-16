@@ -1,6 +1,6 @@
 Server:
   RunMode: debug
-  HttpPort: 8000
+  HttpPort: 8081
   ReadTimeout: 60
   WriteTimeout: 60
 App:
@@ -10,7 +10,7 @@ App:
   LogFileName: app
   LogFileExt: .log
   UploadSavePath: storage/uploads
-  UploadServerUrl: http://127.0.0.1:8000/static
+  UploadServerUrl: http://127.0.0.1:8081/static
   UploadImageMaxSize: 5
   UploadImageAllowExts:
     - .jpg
@@ -27,6 +27,12 @@ Database:
   ParseTime: True
   MaxIdleConns: 10
   MaxOpenConns: 30
+redis:
+    host: "127.0.0.1"
+    port: 6379
+    password: ""
+    db: 0
+    pool_size: 100
 JWT:
   Secret: Gyu
   Issuer: blog-service
@@ -34,9 +40,9 @@ JWT:
 Email:
   Host: smtp.qq.com
   Port: 465
-  UserName: 3301255914@qq.com
+  UserName: 2075276808@qq.com
   Password: 2288.xzk
   IsSSL: true
-  From: 3301255914@qq.com
+  From: 2075276808@qq.com
   To:
     - xxx@qq.com

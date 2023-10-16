@@ -19,7 +19,7 @@ const TypeImage FileType = iota + 1
 func GetFileName(name string) string {
 	ext := GetFileExt(name)
 	fileName := strings.TrimSuffix(name, ext)
-	fileName = util.EncodeMd5(fileName)
+	fileName = util.EncodeMd5([]byte(fileName))
 	return fileName + ext
 }
 

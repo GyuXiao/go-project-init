@@ -6,6 +6,8 @@ import (
 	"GyuBlog/internal/routers"
 	"GyuBlog/pkg/logger"
 	"GyuBlog/pkg/setting"
+	"GyuBlog/pkg/snowflake"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/locales/en"
@@ -18,7 +20,6 @@ import (
 	"time"
 )
 
-// init 方法的主要作用是进行应用程序的初始化流程控制，整个应用代码里只有一个 init 方法，在这里调用初始化配置的方法，使配置文件内容映射到应用配置结构体
 func init() {
 	err := setupSetting()
 	if err != nil {
@@ -36,6 +37,12 @@ func init() {
 	}
 
 	setupValidator()
+
+	// 雪花算法生成分布式 ID
+	if err := snowflake.Init(1); err != nil {
+		fmt.Printf("init snowflake failed, err:%v\n", err)
+		return
+	}
 }
 
 // 在 setupLogger 函数内部对 global 的包全局变量 Logger 进行了初始化，
@@ -118,10 +125,6 @@ func main() {
 		WriteTimeout:   global.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
-	// 校验配置是否真正的映射到配置结构体
-	//log.Println(global.ServerSetting)
-	//log.Println(global.AppSetting)
-	//log.Println(global.DatabaseSetting)
 
 	// 测试 Logger 是否达到预期
 	//global.Logger.Infof("%s: go-programming-tour-book/%s", "eddycjy", "blog-service")

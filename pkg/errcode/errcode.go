@@ -20,7 +20,7 @@ var codes = map[int]string{}
 func NewError(code int, msg string) *Errors {
 	// 创建新的 Error 实例之前，先进行查重的校验
 	if _, ok := codes[code]; ok {
-		panic(fmt.Sprintf("错误码 %d 已经存在，请更换一个", code))
+		panic(any(fmt.Sprintf("错误码 %d 已经存在，请更换一个", code)))
 	}
 	codes[code] = msg
 	return &Errors{code: code, msg: msg}
@@ -79,6 +79,8 @@ func (e *Errors) StatusCode() int {
 		return http.StatusUnauthorized
 	case TooManyRequests.Code():
 		return http.StatusTooManyRequests
+	case ErrorUserExit.Code():
+		return http.StatusOK
 	}
 	return http.StatusInternalServerError
 }

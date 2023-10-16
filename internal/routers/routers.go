@@ -4,12 +4,9 @@ import (
 	_ "GyuBlog/docs"
 	"GyuBlog/global"
 	"GyuBlog/internal/middleware"
-	"GyuBlog/internal/routers/api"
-	v1 "GyuBlog/internal/routers/api/v1"
-	"GyuBlog/pkg/app"
+	v2 "GyuBlog/internal/routers/api/v2"
 	"GyuBlog/pkg/limiter"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"time"
 )
 
@@ -33,35 +30,15 @@ func NewRouter() *gin.Engine {
 	r.Use(middleware.RateLimiter(methodLimiters))
 	r.Use(middleware.ContextTimeout(60 * time.Second))
 
-	// 测试一下 swagger
-	// 可以尝试访问一下：http://127.0.0.1:8000/swagger/index.html
-	// url := ginSwagger.URL("http://127.0.0.1:8000/swagger/doc.json")
-	// r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	user := v2.NewUser()
 
-	tag := v1.NewTag()
-	article := v1.NewArticle()
+	//r.GET("/auth", api.GetAuth)
+	apiv1 := r.Group("/api/v2")
 
-	upload := api.NewUpload()
-	r.POST("/upload/file", upload.UploadFile)
-	r.StaticFS("/static", http.Dir(global.AppSetting.UploadSavePath))
+	// 用户模块
+	// 登陆注册业务
+	apiv1.POST("/signup", user.SignupHandler)
 
-	r.GET("/auth", api.GetAuth)
-	apiv1 := r.Group("/api/v1")
-	apiv1.Use(app.JWT())
-	{
-		apiv1.POST("/tags", tag.Create)       // 新增标签
-		apiv1.DELETE("/tags/:id", tag.Delete) // 删除指定标签
-		apiv1.PUT("/tags/:id", tag.Update)    // 更新指定标签
-		apiv1.PATCH("/tags/:id/state", tag.Update)
-		apiv1.GET("/tags", tag.List) // 获取标签列表
-
-		apiv1.POST("/articles", article.Create)       // 新增文章
-		apiv1.DELETE("/articles/:id", article.Delete) // 删除指定文章
-		apiv1.PUT("/articles/:id", article.Update)    // 更新指定文章
-		apiv1.PATCH("/articles/:id/state", article.Update)
-		apiv1.GET("/articles/:id", article.Get) // 获取指定文章
-		apiv1.GET("/articles", article.List)    // 获取文章列表
-	}
-
+	//apiv1.Use(app.JWT())
 	return r
 }

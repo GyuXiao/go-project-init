@@ -16,6 +16,12 @@ type Response struct {
 	Ctx *gin.Context
 }
 
+type ResponseData struct {
+	Code    int         `json:"code"`
+	Message string      `json:"msg"`
+	Data    interface{} `json:"data,omitempty"` // omitempty当data为空时,不展示这个字段
+}
+
 type Pager struct {
 	Page      int `json:"page"`
 	PageSize  int `json:"page_size"`
