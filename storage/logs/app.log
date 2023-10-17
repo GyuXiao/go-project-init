@@ -60,3 +60,4 @@
 2023/10/16 17:26:57 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ","time":1697448417771063900}
 2023/10/16 17:27:06 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ConfirmPassword必须等于Password","time":1697448426186972100}
 2023/10/16 17:49:35 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ConfirmPassword必须等于Password","time":1697449775008380100}
+2023/10/17 22:44:55 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Signup failed, err: Error 1054: Unknown column '芙芙' in 'field list'","time":1697553895794946600}

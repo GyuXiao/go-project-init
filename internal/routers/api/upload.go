@@ -22,7 +22,8 @@ C:\Users\ZK.xiao>curl -X POST http://127.0.0.1:8000/upload/file -F file=@D:/Gola
 {"file_success_url":"http://127.0.0.1:8000/static/96d6f2e7e1f705ab5e59c84a6dc009b2.jpg"}
 */
 
-func (u Upload) UploadFile(c *gin.Context) {
+// UploadFileHandler 上传文件
+func (u Upload) UploadFileHandler(c *gin.Context) {
 	response := app.NewResponse(c)
 	// 读取入参 file 字段的上传文件信息
 	file, fileHeader, err := c.Request.FormFile("file")

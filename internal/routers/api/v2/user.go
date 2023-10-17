@@ -39,7 +39,7 @@ func (u User) SignupHandler(c *gin.Context) {
 		return
 	}
 
-	// 操作成功响应
+	// 业务响应
 	response.ToErrorResponse(errcode.Success.WithDetails([]string{param.UserName, param.Email}...))
 	return
 }
