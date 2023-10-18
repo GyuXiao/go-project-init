@@ -23,7 +23,11 @@ func NewError(code int, msg string) *Errors {
 		panic(any(fmt.Sprintf("错误码 %d 已经存在，请更换一个", code)))
 	}
 	codes[code] = msg
-	return &Errors{code: code, msg: msg}
+	return &Errors{
+		code:    code,
+		msg:     msg,
+		details: []string{},
+	}
 }
 
 func (e *Errors) Error() string {
@@ -48,7 +52,6 @@ func (e *Errors) Details() []string {
 
 func (e *Errors) WithDetails(details ...string) *Errors {
 	newError := *e
-	newError.details = []string{}
 	for _, d := range details {
 		newError.details = append(newError.details, d)
 	}
@@ -80,6 +83,8 @@ func (e *Errors) StatusCode() int {
 	case TooManyRequests.Code():
 		return http.StatusTooManyRequests
 	case ErrorUserExit.Code():
+		return http.StatusOK
+	case ErrorUserNotExit.Code():
 		return http.StatusOK
 	}
 	return http.StatusInternalServerError

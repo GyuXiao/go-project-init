@@ -6,11 +6,13 @@ import (
 )
 
 type User struct {
-	UserID   uint64 `json:"user_id,string" gorm:"column:user_id"`
-	UserName string `json:"username" gorm:"column:username;index:username"`
-	Password string `json:"password" gorm:"column:password"`
-	Email    string `json:"email" gorm:"column:email"`
-	Gender   int    `json:"gender" gorm:"column:gender"`
+	UserID       uint64 `json:"user_id,string" gorm:"column:user_id"`
+	UserName     string `json:"username" gorm:"column:username;index:username"`
+	Password     string `json:"password" gorm:"column:password"`
+	Email        string `json:"email" gorm:"column:email"`
+	Gender       int    `json:"gender" gorm:"column:gender"`
+	AccessToken  string
+	RefreshToken string
 }
 
 func (u User) TableName() string {
@@ -28,7 +30,7 @@ func (u User) Create(db *gorm.DB) error {
 // 3，除以上的其他错误，都需要返回对应的错误
 func (u User) SelectUserByName(db *gorm.DB, username string) error {
 	var user User
-	result := db.Select(username).Where("username = ?", username).First(&user)
+	result := db.Select("username").Where("username = ?", username).First(&user)
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
 			return nil
@@ -36,4 +38,13 @@ func (u User) SelectUserByName(db *gorm.DB, username string) error {
 		return result.Error
 	}
 	return errcode.ErrorUserExit
+}
+
+func (u *User) SelectUserIDAndPasswordByUsername(db *gorm.DB) (userID uint64, password string, err error) {
+	var user User
+	result := db.Select([]string{"user_id", "password"}).Where("username = ?", u.UserName).First(&user)
+	if result.Error != nil {
+		return 0, "", result.Error
+	}
+	return user.UserID, user.Password, nil
 }

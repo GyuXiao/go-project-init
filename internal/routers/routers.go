@@ -36,8 +36,10 @@ func NewRouter() *gin.Engine {
 	apiv1 := r.Group("/api/v2")
 
 	// 用户模块
-	// 登陆注册业务
+	// 用户注册
 	apiv1.POST("/signup", user.SignupHandler)
+	// 用户登陆
+	apiv1.POST("/login", user.LoginHandler)
 
 	//apiv1.Use(app.JWT())
 	return r
