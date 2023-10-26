@@ -19,7 +19,7 @@ func (d *Dao) InsertUser(u model.User) error {
 
 func (d *Dao) Login(u *model.User) error {
 	originPassword := u.Password
-	// 通过用户名查找 userID 和 password
+	// 通过 username 查找 userID 和 password
 	userID, password, err := u.SelectUserIDAndPasswordByUsername(d.engine)
 	// 数据库查询错误
 	if err != nil && err != gorm.ErrRecordNotFound {

@@ -64,3 +64,5 @@
 2023/10/18 16:20:56 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: ","time":1697617256714888000}
 2023/10/18 16:25:38 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: ","time":1697617538134289400}
 2023/10/18 16:26:05 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ","time":1697617565761712500}
+2023/10/27 00:32:49 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: ","time":1698337969380211300}
+2023/10/27 00:36:27 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Signup failed, err: Error 1054: Unknown column 'access_token' in 'field list'","time":1698338187767686700}
