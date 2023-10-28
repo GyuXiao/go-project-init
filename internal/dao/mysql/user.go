@@ -13,7 +13,7 @@ func (d *Dao) CheckUserExist(username string) error {
 	return u.SelectUserByName(d.engine, username)
 }
 
-func (d *Dao) InsertUser(u model.User) error {
+func (d *Dao) InsertUser(u *model.User) error {
 	return u.Create(d.engine)
 }
 

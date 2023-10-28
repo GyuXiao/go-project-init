@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"log"
 	"time"
 )
 
@@ -40,7 +41,7 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	))
 
 	if err != nil {
-		return nil, err
+		log.Printf("init mysql failed, err: %v", err)
 	}
 
 	if global.ServerSetting.RunMode == "debug" {

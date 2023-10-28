@@ -31,7 +31,7 @@ func (svc *Service) Signup(p *UserSignupRequest) error {
 	if err != nil {
 		return err
 	}
-	u := model.User{
+	u := &model.User{
 		UserID:   userID,
 		UserName: p.UserName,
 		Password: util.EncodeMd5([]byte(p.Password)),

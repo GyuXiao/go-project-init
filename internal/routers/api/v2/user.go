@@ -59,12 +59,16 @@ func (u User) LoginHandler(c *gin.Context) {
 	svc := service.New(c.Request.Context())
 	user, err := svc.Login(&param)
 	if err != nil {
-		global.Logger.Errorf(c, "svc.Login errs: %v", errs)
+		global.Logger.Errorf(c, "svc.Login errs: %v", err)
 		if err == errcode.ErrorUserNotExit {
 			response.ToErrorResponse(errcode.ErrorUserNotExit)
 			return
 		}
-		response.ToErrorResponse(errcode.ErrorUserLoginFail.WithDetails(errs.Errors()...))
+		if err == errcode.ErrorUserPassword {
+			response.ToErrorResponse(errcode.ErrorUserPassword)
+			return
+		}
+		response.ToErrorResponse(errcode.ErrorUserLoginFail.WithDetails(err.Error()))
 		return
 	}
 

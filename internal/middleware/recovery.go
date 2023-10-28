@@ -21,7 +21,7 @@ func Recovery() gin.HandlerFunc {
 	})
 	return func(c *gin.Context) {
 		defer func() {
-			if err := recover(); err != any(nil) {
+			if err := recover(); err != nil {
 				global.Logger.WithCallersEngine().Errorf(c, "panic recover err: %v", err)
 				err := defaultMailer.SendEmail(
 					global.EmailSetting.To,

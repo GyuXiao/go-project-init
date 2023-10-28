@@ -20,7 +20,7 @@ func (u User) TableName() string {
 }
 
 func (u User) Create(db *gorm.DB) error {
-	return db.Create(&u).Error
+	return db.Select("UserID", "UserName", "Password", "Email", "Gender").Create(&u).Error
 }
 
 // SelectUserByName
