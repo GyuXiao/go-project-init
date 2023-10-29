@@ -1,7 +1,8 @@
-version: "1.0"
+version: "2.0"
 services:
   mysql8019:
     image: "mysql:8.0.19"
+    restart: always
     ports:
       - "33061:3306"
     command: "--default-authentication-plugin=mysql_native_password --init-file /data/application/init.sql"
@@ -9,6 +10,8 @@ services:
       MYSQL_ROOT_PASSWORD: "2288.xzk"
       MYSQL_DATABASE: "blog_service"
       MYSQL_PASSWORD: "2288.xzk"
+    networks:
+      - gyu_blog_net
     volumes:
       - ./init.sql:/data/application/init.sql
   gyublog_app:
@@ -16,5 +19,12 @@ services:
     depends_on:
       - mysql8019
     build: .
+    volumes:
+      - .:/gyublog_app-1
+    networks:
+      - gyu_blog_net
     ports:
       - "8081:8081"
+networks:
+  gyu_blog_net:
+    driver: bridge

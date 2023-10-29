@@ -126,6 +126,8 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 
+	defer model.CloseDBEngine()
+
 	// 测试 Logger 是否达到预期
 	//global.Logger.Infof("%s: go-programming-tour-book/%s", "eddycjy", "blog-service")
 

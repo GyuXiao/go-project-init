@@ -40,6 +40,7 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 		databaseSetting.ParseTime,
 	))
 
+	// 这里只是打印了 err，没有返回 err，不知是否正确
 	if err != nil {
 		log.Printf("init mysql failed, err: %v", err)
 	}
@@ -132,4 +133,8 @@ func addExtraSpaceIfExist(str string) string {
 		return " " + str
 	}
 	return ""
+}
+
+func CloseDBEngine() {
+	_ = global.DBEngine.Close()
 }
