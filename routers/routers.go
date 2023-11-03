@@ -3,8 +3,8 @@ package routers
 import (
 	_ "GyuBlog/docs"
 	"GyuBlog/global"
-	"GyuBlog/internal/middleware"
-	v2 "GyuBlog/internal/routers/api/v2"
+	v2 "GyuBlog/handlers/user/v2"
+	"GyuBlog/middleware"
 	"GyuBlog/pkg/limiter"
 	"github.com/gin-gonic/gin"
 	"time"
@@ -33,14 +33,14 @@ func NewRouter() *gin.Engine {
 	user := v2.NewUser()
 
 	//r.GET("/auth", api.GetAuth)
-	apiv1 := r.Group("/api/v2")
+	apiv2 := r.Group("/api/v2")
 
 	// 用户模块
 	// 用户注册
-	apiv1.POST("/signup", user.SignupHandler)
+	apiv2.POST("/signup", user.SignupHandler)
 	// 用户登陆
-	apiv1.POST("/login", user.LoginHandler)
+	apiv2.POST("/login", user.LoginHandler)
 
-	//apiv1.Use(app.JWT())
+	//apiv2.Use(app.JWT())
 	return r
 }

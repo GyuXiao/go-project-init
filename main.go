@@ -2,11 +2,11 @@ package main
 
 import (
 	"GyuBlog/global"
-	"GyuBlog/internal/model"
-	"GyuBlog/internal/routers"
+	"GyuBlog/model"
 	"GyuBlog/pkg/logger"
 	"GyuBlog/pkg/setting"
 	"GyuBlog/pkg/snowflake"
+	routers2 "GyuBlog/routers"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -117,7 +117,7 @@ func setupValidator() {
 func main() {
 	// 把映射好的配置和 gin 的运行模式进行配置
 	gin.SetMode(global.ServerSetting.RunMode)
-	router := routers.NewRouter()
+	router := routers2.NewRouter()
 	s := &http.Server{
 		Addr:           ":" + global.ServerSetting.HttpPort,
 		Handler:        router,

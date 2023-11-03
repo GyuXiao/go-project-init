@@ -1,12 +1,12 @@
-package api
+package file
 
 import (
 	"GyuBlog/global"
-	"GyuBlog/internal/service"
 	"GyuBlog/pkg/app"
 	"GyuBlog/pkg/convert"
 	"GyuBlog/pkg/errcode"
 	"GyuBlog/pkg/upload"
+	"GyuBlog/service"
 	"github.com/gin-gonic/gin"
 )
 

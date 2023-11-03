@@ -1,14 +1,8 @@
-// Package service
-/**
-  @author: zk.xiao
-  @date: 2022/5/26
-  @note:
-**/
 package service
 
 import (
+	"GyuBlog/dao/mysql"
 	"GyuBlog/global"
-	"GyuBlog/internal/dao/mysql"
 	"context"
 )
 

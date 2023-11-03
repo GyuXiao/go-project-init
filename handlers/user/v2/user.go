@@ -2,9 +2,9 @@ package v2
 
 import (
 	"GyuBlog/global"
-	"GyuBlog/internal/service"
 	"GyuBlog/pkg/app"
 	"GyuBlog/pkg/errcode"
+	"GyuBlog/service"
 	"github.com/gin-gonic/gin"
 )
 

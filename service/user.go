@@ -1,7 +1,7 @@
 package service
 
 import (
-	"GyuBlog/internal/model"
+	"GyuBlog/model"
 	"GyuBlog/pkg/jwt"
 	"GyuBlog/pkg/snowflake"
 	"GyuBlog/pkg/util"
