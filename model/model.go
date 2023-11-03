@@ -136,5 +136,5 @@ func addExtraSpaceIfExist(str string) string {
 }
 
 func CloseDBEngine() {
-	_ = global.DBEngine.Close()
+	_ = DBEngine.Close()
 }

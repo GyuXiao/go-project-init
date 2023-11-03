@@ -87,3 +87,8 @@
 2023/10/29 23:32:46 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: Password为必填字段","time":1698593566676533200}
 2023/11/03 11:57:00 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1698983820006540800}
 2023/11/03 11:57:10 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: Password为必填字段","time":1698983830550879800}
+2023/11/03 15:32:23 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: ConfirmPassword必须等于Password","time":1698996743794985200}
+2023/11/03 15:32:55 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040003, 错误信息：用户不存在","time":1698996775213292100}
+2023/11/03 17:38:07 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040003, 错误信息：用户不存在","time":1699004287486434900}
+2023/11/03 17:38:20 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699004300655870200}
+2023/11/03 17:38:33 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: Password为必填字段","time":1699004313926496200}

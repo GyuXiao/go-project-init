@@ -2,7 +2,7 @@ package service
 
 import (
 	"GyuBlog/dao/mysql"
-	"GyuBlog/global"
+	"GyuBlog/model"
 	"context"
 )
 
@@ -13,6 +13,8 @@ type Service struct {
 
 func New(ctx context.Context) Service {
 	svc := Service{ctx: ctx}
-	svc.dao = mysql.New(global.DBEngine)
+	if svc.dao == nil {
+		svc.dao = mysql.New(model.DBEngine)
+	}
 	return svc
 }
