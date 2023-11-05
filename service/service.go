@@ -1,20 +1,22 @@
 package service
 
 import (
-	"GyuBlog/dao/mysql"
-	"GyuBlog/model"
 	"context"
+	"sync"
 )
 
 type Service struct {
 	ctx context.Context
-	dao *mysql.Dao
 }
 
+var once sync.Once
+var svc Service
+
+// 单例模式应用
+
 func New(ctx context.Context) Service {
-	svc := Service{ctx: ctx}
-	if svc.dao == nil {
-		svc.dao = mysql.New(model.DBEngine)
-	}
+	once.Do(func() {
+		svc = Service{ctx: ctx}
+	})
 	return svc
 }

@@ -92,3 +92,7 @@
 2023/11/03 17:38:07 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040003, 错误信息：用户不存在","time":1699004287486434900}
 2023/11/03 17:38:20 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699004300655870200}
 2023/11/03 17:38:33 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"app.BindAndValid errs: Password为必填字段","time":1699004313926496200}
+2023/11/05 22:36:38 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699194998290201900}
+2023/11/05 22:37:28 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699195048382946700}
+2023/11/05 22:47:11 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040003, 错误信息：用户不存在","time":1699195631539581400}
+2023/11/05 22:48:02 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699195682953899000}

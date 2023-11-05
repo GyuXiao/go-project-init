@@ -2,9 +2,11 @@ package service
 
 import (
 	"GyuBlog/model"
+	"GyuBlog/pkg/errcode"
 	"GyuBlog/pkg/jwt"
 	"GyuBlog/pkg/snowflake"
 	"GyuBlog/pkg/util"
+	"github.com/jinzhu/gorm"
 )
 
 type UserSignupRequest struct {
@@ -22,14 +24,15 @@ type UserLoginRequest struct {
 
 func (svc *Service) Signup(p *UserSignupRequest) error {
 	// 先判断待注册的用户的用户名是否已经存在
-	err := svc.dao.CheckUserExist(p.UserName)
+	err := model.SelectUserByUsername(p.UserName)
+	// 如果用户已经存在或者查询数据时发现其他错误，则返回错误，不能继续注册操作
 	if err != nil {
 		return err
 	}
 	// 通过雪花算法获取 userID
-	userID, err := snowflake.GetID()
-	if err != nil {
-		return err
+	userID, snowErr := snowflake.GetID()
+	if snowErr != nil {
+		return snowErr
 	}
 	u := &model.User{
 		UserID:   userID,
@@ -39,20 +42,32 @@ func (svc *Service) Signup(p *UserSignupRequest) error {
 		Gender:   p.Gender,
 	}
 	// 注册用户
-	return svc.dao.InsertUser(u)
+	return u.Create()
 }
 
 func (svc *Service) Login(p *UserLoginRequest) (user *model.User, error error) {
+	userID, password, err := model.SelectUserIDAndPasswordByUsername(p.UserName)
+	// 数据库查询错误
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return nil, err
+	}
+	// 数据库里没有记录
+	if err == gorm.ErrRecordNotFound {
+		return nil, errcode.ErrorUserNotExit
+	}
+	// 查到记录的密码错误
+	if password != util.EncodeMd5([]byte(p.Password)) {
+		return nil, errcode.ErrorUserPassword
+	}
+
+	// 数据查询成功
 	user = &model.User{
 		UserName: p.UserName,
-		Password: p.Password,
+		UserID:   userID,
 	}
-	if err := svc.dao.Login(user); err != nil {
-		return nil, err
-	}
-	accessToken, refreshToken, err := jwt.GenToken(user.UserID, user.UserName)
-	if err != nil {
-		return nil, err
+	accessToken, refreshToken, genError := jwt.GenToken(user.UserID, user.UserName)
+	if genError != nil {
+		return nil, genError
 	}
 	user.AccessToken = accessToken
 	user.RefreshToken = refreshToken

@@ -19,18 +19,18 @@ func (u User) TableName() string {
 	return "user"
 }
 
-func (u User) Create(db *gorm.DB) error {
-	return db.Select("UserID", "UserName", "Password", "Email", "Gender").Create(&u).Error
+func (u *User) Create() error {
+	return DBEngine.Select("UserID", "UserName", "Password", "Email", "Gender").Create(&u).Error
 }
 
-// SelectUserByName
+// SelectUserByUsername
 // 对于这个方法的返回值
 // 1，如果在 User 表里找到了记录，返回 ErrorUserExit 业务码
 // 2，如果在 User 表找不到记录，返回 nil
 // 3，除以上的其他错误，都需要返回对应的错误
-func (u User) SelectUserByName(db *gorm.DB, username string) error {
+func SelectUserByUsername(username string) error {
 	var user User
-	result := db.Select("username").Where("username = ?", username).First(&user)
+	result := DBEngine.Select("username").Where("username = ?", username).First(&user)
 	if result.Error != nil {
 		if result.Error == gorm.ErrRecordNotFound {
 			return nil
@@ -40,9 +40,9 @@ func (u User) SelectUserByName(db *gorm.DB, username string) error {
 	return errcode.ErrorUserExit
 }
 
-func (u *User) SelectUserIDAndPasswordByUsername(db *gorm.DB) (userID uint64, password string, err error) {
+func SelectUserIDAndPasswordByUsername(username string) (userID uint64, password string, err error) {
 	var user User
-	result := db.Select([]string{"user_id", "password"}).Where("username = ?", u.UserName).First(&user)
+	result := DBEngine.Select([]string{"user_id", "password"}).Where("username = ?", username).First(&user)
 	if result.Error != nil {
 		return 0, "", result.Error
 	}
