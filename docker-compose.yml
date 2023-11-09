@@ -1,21 +1,25 @@
 version: "2.0"
+
+networks:
+  gyu_blog_net:
+
 services:
   mysql8019:
     image: "mysql:8.0.19"
     restart: always
     ports:
       - "33061:3306"
-    command: "--default-authentication-plugin=mysql_native_password --init-file /data/application/init.sql"
     environment:
-      MYSQL_ROOT_PASSWORD: "2288.xzk"
+      MYSQL_ROOT_PASSWORD: "123"
       MYSQL_DATABASE: "blog_service"
-      MYSQL_PASSWORD: "2288.xzk"
+      MYSQL_PASSWORD: "123"
+      MYSQL_USER: "gyu"
     networks:
       - gyu_blog_net
     volumes:
-      - ./init.sql:/data/application/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # 这是 MySQL 容器初始化时会自动运行的 SQL 初始化脚本目录。
+
   gyublog_app:
-    #command: sh -c "./wait-for.sh mysql8019:3306 -- ./gyublog_app ./conf/config.yaml"
     depends_on:
       - mysql8019
     build: .
@@ -25,6 +29,9 @@ services:
       - gyu_blog_net
     ports:
       - "8081:8081"
-networks:
-  gyu_blog_net:
-    driver: bridge
+    environment:
+      DB_HOST: "mysql8019"
+      DB_PORT: "33061"
+      DB_USER: "gyu"
+      DB_PASSWORD: "123"
+      DB_NAME: "blog_service"

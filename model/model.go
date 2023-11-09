@@ -40,6 +40,21 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 		databaseSetting.ParseTime,
 	))
 
+	// 容器化操作
+	// 	dbPort := os.Getenv("DB_PORT")
+	//	dbHost := os.Getenv("DB_HOST")
+	//	dbUser := os.Getenv("DB_USER")
+	//	dbPassword := os.Getenv("DB_PASSWORD")
+	//	dbName := os.Getenv("DB_NAME")
+	//	s := "%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=true"
+	//	db, err := gorm.Open(databaseSetting.DBType, fmt.Sprintf(s,
+	//		dbUser,
+	//		dbPassword,
+	//		dbHost,
+	//		dbPort,
+	//		dbName,
+	//	))
+
 	// 这里只是打印了 err，没有返回 err，不知是否正确
 	if err != nil {
 		log.Printf("init mysql failed, err: %v", err)
