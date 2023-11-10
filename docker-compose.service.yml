@@ -1,0 +1,21 @@
+# 本文件编写和定义和服务相关的容器
+version: "2.0"
+services:
+  gyublog_app:
+    container_name: gyuBlog-service
+    ports:
+      - "8081:8081"
+    build: .
+    volumes:
+      - ./conf:/app/conf
+      - ./storage/logs:/app/log
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 33061
+      DB_USER: gyu
+      DB_PASSWORD: 123
+      DB_NAME: blog_service
+    networks:
+      - gyu_blog_net
+networks:
+  gyu_blog_net:
