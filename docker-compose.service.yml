@@ -10,8 +10,8 @@ services:
       - ./conf:/app/conf
       - ./storage/logs:/app/log
     environment:
-      DB_HOST: mysql
-      DB_PORT: 33061
+      DB_HOST: mysql # 数据库地址（因为在同一个网络，可以直接访问容器名）
+      DB_PORT: 3306 # 数据库端口
       DB_USER: gyu
       DB_PASSWORD: 123
       DB_NAME: blog_service
