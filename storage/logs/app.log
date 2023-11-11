@@ -96,3 +96,11 @@
 2023/11/05 22:37:28 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699195048382946700}
 2023/11/05 22:47:11 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040003, 错误信息：用户不存在","time":1699195631539581400}
 2023/11/05 22:48:02 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699195682953899000}
+2023/11/11 12:15:09 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699676109252167300}
+2023/11/11 12:16:26 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040003, 错误信息：用户不存在","time":1699676186943201900}
+2023/11/11 13:42:32 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Signup failed, err: Error 1406 (22001): Data too long for column 'password' at row 1","time":1699681352526552300}
+2023/11/11 13:56:12 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Signup failed, err: Error 1406 (22001): Data too long for column 'password' at row 1","time":1699682172192073300}
+2023/11/11 13:59:13 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699682353181599100}
+2023/11/11 14:01:56 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699682516119141900}
+2023/11/11 14:02:28 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699682548731742600}
+2023/11/11 15:25:17 {"callers":["$D:/GolandProjects/GyuBlog/main.go: 29 main.init.0"],"level":"error","message":"svc.Login errs: 错误码：20040004, 错误信息：用户密码错误","time":1699687517689431700}

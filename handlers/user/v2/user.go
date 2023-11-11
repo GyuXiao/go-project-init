@@ -5,6 +5,7 @@ import (
 	"GyuBlog/pkg/app"
 	"GyuBlog/pkg/errcode"
 	"GyuBlog/service"
+	"errors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,7 +30,7 @@ func (u User) SignupHandler(c *gin.Context) {
 	svc := service.New(c.Request.Context())
 	err := svc.Signup(&param)
 	if err != nil {
-		if err == errcode.ErrorUserExit {
+		if errors.Is(err, errcode.ErrorUserExit) {
 			// 用户已经存在
 			response.ToErrorResponse(errcode.ErrorUserExit)
 			return
@@ -60,11 +61,11 @@ func (u User) LoginHandler(c *gin.Context) {
 	user, err := svc.Login(&param)
 	if err != nil {
 		global.Logger.Errorf(c, "svc.Login errs: %v", err)
-		if err == errcode.ErrorUserNotExit {
+		if errors.Is(err, errcode.ErrorUserNotExit) {
 			response.ToErrorResponse(errcode.ErrorUserNotExit)
 			return
 		}
-		if err == errcode.ErrorUserPassword {
+		if errors.Is(err, errcode.ErrorUserPassword) {
 			response.ToErrorResponse(errcode.ErrorUserPassword)
 			return
 		}

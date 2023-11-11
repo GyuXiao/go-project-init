@@ -6,6 +6,7 @@ import (
 	"GyuBlog/pkg/jwt"
 	"GyuBlog/pkg/snowflake"
 	"GyuBlog/pkg/util"
+	"errors"
 	"github.com/jinzhu/gorm"
 )
 
@@ -34,29 +35,43 @@ func (svc *Service) Signup(p *UserSignupRequest) error {
 	if snowErr != nil {
 		return snowErr
 	}
+	// 先对密码加密
+	pwd, err := encodePassword(p.Password)
+	if err != nil {
+		return err
+	}
 	u := &model.User{
 		UserID:   userID,
 		UserName: p.UserName,
-		Password: util.EncodeMd5([]byte(p.Password)),
+		Password: pwd,
 		Email:    p.Email,
 		Gender:   p.Gender,
 	}
 	// 注册用户
-	return u.Create()
+	return u.CreateUser()
+}
+
+func encodePassword(pwd string) (string, error) {
+	hashStr, err := util.EncodeBcrypt(pwd)
+	if err != nil {
+		return "", err
+	}
+	return util.EncodeMd5([]byte(hashStr)), nil
 }
 
 func (svc *Service) Login(p *UserLoginRequest) (user *model.User, error error) {
 	userID, password, err := model.SelectUserIDAndPasswordByUsername(p.UserName)
 	// 数据库查询错误
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, err
 	}
 	// 数据库里没有记录
-	if err == gorm.ErrRecordNotFound {
+	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, errcode.ErrorUserNotExit
 	}
 	// 查到记录的密码错误
-	if password != util.EncodeMd5([]byte(p.Password)) {
+	pwd := util.DecodeMd5(password)
+	if !util.DecodeBcrypt(pwd, p.Password) {
 		return nil, errcode.ErrorUserPassword
 	}
 

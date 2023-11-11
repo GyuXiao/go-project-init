@@ -2,6 +2,7 @@ package model
 
 import (
 	"GyuBlog/pkg/errcode"
+	"errors"
 	"github.com/jinzhu/gorm"
 )
 
@@ -15,11 +16,11 @@ type User struct {
 	RefreshToken string
 }
 
-func (u User) TableName() string {
+func (u *User) TableName() string {
 	return "user"
 }
 
-func (u *User) Create() error {
+func (u *User) CreateUser() error {
 	return DBEngine.Select("UserID", "UserName", "Password", "Email", "Gender").Create(&u).Error
 }
 
@@ -32,7 +33,7 @@ func SelectUserByUsername(username string) error {
 	var user User
 	result := DBEngine.Select("username").Where("username = ?", username).First(&user)
 	if result.Error != nil {
-		if result.Error == gorm.ErrRecordNotFound {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return nil
 		}
 		return result.Error
