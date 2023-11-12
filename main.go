@@ -64,7 +64,7 @@ func setupSetting() error {
 		return err
 	}
 
-	// ReadSection(k, v)，k 和 v 是一一对应的
+	// setting 的工作，就是读取配置文件 conf/config.yaml，然后将配置文件的每个模块的内容 unmarshal 给对应的结构体
 	err = setting.ReadSection("Server", &global.ServerSetting)
 	if err != nil {
 		return err
@@ -110,10 +110,6 @@ func setupValidator() {
 	}
 }
 
-// @title Gyu 博客系统
-// @version 1.0
-// @description 使用 Go 搭建一个 Blog
-// @termsOfService https://github.com/GyuXiao/GyuBlog
 func main() {
 	// 把映射好的配置和 gin 的运行模式进行配置
 	gin.SetMode(global.ServerSetting.RunMode)

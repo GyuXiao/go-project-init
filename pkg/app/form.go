@@ -1,9 +1,3 @@
-// Package app
-/**
-  @author: zk.xiao
-  @date: 2022/5/18
-  @note:
-**/
 package app
 
 import (

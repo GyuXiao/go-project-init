@@ -1,12 +1,8 @@
-// Package setting
-/**
-  @author: zk.xiao
-  @date: 2022/5/16
-  @note: 声明配置属性的结构体并编写读取区段配置的配置方法
-**/
 package setting
 
 import "time"
+
+// 声明配置属性的结构体
 
 type ServerSettingS struct {
 	RunMode      string
@@ -55,6 +51,8 @@ type EmailSettingS struct {
 	From     string
 	To       []string
 }
+
+// ReadSection 读取区段配置
 
 func (s *Setting) ReadSection(k string, v interface{}) error {
 	err := s.vp.UnmarshalKey(k, v)

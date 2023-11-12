@@ -22,13 +22,7 @@ type Model struct {
 	IsDel      uint8  `json:"is_del"`
 }
 
-// NewDBEngine
-/**
- * @Description: 创建 DB 实例，同时增加 gorm 库的引入和 MySql 驱动库的初始化
- * @param databaseSetting
- * @return *gorm.DB
- * @return error
- */
+// NewDBEngine 创建 DB 实例，同时增加 gorm 库的引入和 MySql 驱动库的初始化
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 	// 本地环境运行项目
 	s := "%s:%s@tcp(%s)/%s?charset=%s&parseTime=%t&loc=Local"

@@ -1,9 +1,3 @@
-// Package logger
-/**
-  @author: zk.xiao
-  @date: 2022/5/17
-  @note:
-**/
 package logger
 
 import (

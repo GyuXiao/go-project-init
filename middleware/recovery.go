@@ -11,8 +11,8 @@ import (
 )
 
 func Recovery() gin.HandlerFunc {
-	// 密码不应该设置在 config.yaml 文件中
-	// 需要另行考虑
+	// TODO
+	// 密码不应该设置在 config.yaml 文件中，需要另行考虑
 	defaultMailer := email.NewEmail(&email.SMTPInfo{
 		Host:     global.EmailSetting.Host,
 		Port:     global.EmailSetting.Port,

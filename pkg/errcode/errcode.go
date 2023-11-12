@@ -5,10 +5,8 @@ import (
 	"net/http"
 )
 
-// Errors
-/**
- * @Description: 常用的一些错误处理公共方法，标准化错误输出
- */
+// Errors 常用的一些错误处理公共方法，标准化错误输出
+
 type Errors struct {
 	code    int      `json:"code"`
 	msg     string   `json:"msg"`
@@ -59,11 +57,8 @@ func (e *Errors) WithDetails(details ...string) *Errors {
 }
 
 // StatusCode
-/**
- * @Description: 针对一些特定错误码进行状态码的转换，因为不同的内部错误码在 HTTP 状态码中都代表着不同的意义，我们需要将其区分开来，便于客户端以及监控/报警等系统的识别和监听。
- * @receiver e
- * @return int
- */
+// 针对一些特定错误码进行状态码的转换，因为不同的内部错误码在 HTTP 状态码中都代表着不同的意义，我们需要将其区分开来，
+// 便于客户端以及监控/报警等系统的识别和监听。
 func (e *Errors) StatusCode() int {
 	switch e.Code() {
 	case Success.Code():

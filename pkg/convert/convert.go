@@ -1,12 +1,8 @@
-// Package convert
-/**
-  @author: zk.xiao
-  @date: 2022/5/17
-  @note: 类型转换
-**/
 package convert
 
 import "strconv"
+
+// 本文件主要做类型转换操作
 
 type StrTo string
 
